@@ -1,0 +1,13 @@
+# Package managers
+node_modules
+bower_components
+
+# Build files
+lib
+
+# Test build
+test/build
+
+# Test files
+test.phar
+test.zip

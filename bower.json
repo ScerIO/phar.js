@@ -1,0 +1,26 @@
+{
+  "name": "phar",
+  "version": "1.7.0",
+  "description": "Util for pack & unpack PHAR archives",
+  "main": "index.js",
+  "authors": [
+    "Serge Shkurko <sergeshkurko@outlook.com>"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "PHAR"
+  ],
+  "homepage": "https://github.com/pharjs/phar.js",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jshashes": "^1.0.7",
+    "jszip": "Stuk/jszip#^3.1.5",
+    "pako": "^1.0.6"
+  }
+}
