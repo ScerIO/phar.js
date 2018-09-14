@@ -1,8 +1,8 @@
 {
   "name": "phar",
-  "version": "1.7.0",
+  "version": "1.7.2",
   "description": "Util for pack & unpack PHAR archives",
-  "main": "index.js",
+  "main": "./lib/webpack/Phar.js",
   "authors": [
     "Serge Shkurko <sergeshkurko@outlook.com>"
   ],

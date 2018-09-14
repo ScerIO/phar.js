@@ -3,7 +3,7 @@ module.exports = {
   entry: `${__dirname}/src/Phar.ts`,
   output: {
     path: `${__dirname}/lib/webpack`,
-    filename: 'phar.js',
+    filename: 'Phar.js',
     library: 'phar',
     libraryTarget: 'umd',
     umdNamedDefine: true,
@@ -21,7 +21,7 @@ module.exports = {
         test: /\.ts?$/,
         options: {
           compilerOptions: {
-            declarationDir: './'
+            declarationDir: './lib/webpack'
           }
         },
         loader: 'ts-loader'
