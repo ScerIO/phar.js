@@ -21,7 +21,7 @@ export default {
   SUPPORTED_COMPRESSION: [Compression.NONE, Compression.GZ],
 
   /**
-   * End of the phar file (magic)\*
+   * End of the phar file (magic)
    * @property {string} END_MAGIC
    * @readonly
    */

@@ -12,31 +12,26 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.json']
+    extensions: ['.ts', '.js', '.json']
   },
 
   module: {
-    rules: [
-      {
-        test: /\.ts?$/,
-        options: {
-          compilerOptions: {
-            declarationDir: './lib/webpack'
-          }
-        },
-        loader: 'ts-loader'
+    rules: [{
+      test: /\.ts?$/,
+      options: {
+        compilerOptions: {
+          declarationDir: './lib/webpack'
+        }
       },
-
-      {
-        enforce: 'pre',
-        test: /\.js$/,
-        loader: 'source-map-loader'
-      }
-    ]
+      loader: 'ts-loader'
+    },{
+      enforce: 'pre',
+      test: /\.js$/,
+      loader: 'source-map-loader'
+    }]
   },
 
   optimization: {
     minimize: true
   },
-
 }

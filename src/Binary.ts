@@ -6,7 +6,7 @@ export default class Binary {
   /**
    * Reads little-endian 32-bit number
    * @property {string} buffer
-   * @return {number}
+   * @returns {number}
    */
   static readLInt(buffer: string): number {
     let num = 0;
@@ -19,7 +19,7 @@ export default class Binary {
   /**
    * Writes little-endian 32-bit number
    * @property {number} number
-   * @return {string}
+   * @returns {string}
    */
   static writeLInt(number: number): string {
     let buffer = '';
@@ -32,7 +32,7 @@ export default class Binary {
   /**
    * Reads little-endian 16-bit number
    * @property {string} buffer
-   * @return {number}
+   * @returns {number}
    */
   static readLShort(buffer: string): number {
     let num = 0;
@@ -45,7 +45,7 @@ export default class Binary {
   /**
    * Writes little-endian 16-bit number
    * @property {number} number
-   * @return {string}
+   * @returns {string}
    */
   static writeLShort(number: number): string {
     let buffer = '';

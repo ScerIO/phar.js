@@ -26,7 +26,7 @@ export default class BinaryBuffer {
   }
 
   /**
-   * @return {string}
+   * @returns {string}
    */
   public getBuffer(): string {
     return this.buffer
@@ -41,7 +41,7 @@ export default class BinaryBuffer {
     }
 
     if (length == 0) {
-      return ""
+      return ''
     }
 
     if ((this.offset += length) > this.buffer.length) {
@@ -54,12 +54,13 @@ export default class BinaryBuffer {
   /**
    * @param {string} data
    */
-  public put(data: string): void {
+  public put(data: string): this {
     this.buffer += data
+    return this;
   }
 
   /**
-   * @return {number}
+   * @returns {number}
    */
   public getLInt(): number {
     return Binary.readLInt(this.get(4))
@@ -68,12 +69,13 @@ export default class BinaryBuffer {
   /**
    * @param {number} number
    */
-  public putLInt(number: number): void {
+  public putLInt(number: number): this {
     this.put(Binary.writeLInt(number))
+    return this;
   }
 
   /**
-   * @return {number}
+   * @returns {number}
    */
   public getLShort(): number {
     return Binary.readLShort(this.get(2))
@@ -82,12 +84,13 @@ export default class BinaryBuffer {
   /**
    * @param {number} number
    */
-  public putLShort(number: number): void {
+  public putLShort(number: number): this {
     this.put(Binary.writeLShort(number))
+    return this;
   }
 
   /**
-   * @return {string}
+   * @returns {string}
    */
   public getString(): string {
     return this.get(this.getLInt())
@@ -96,8 +99,9 @@ export default class BinaryBuffer {
   /**
    * @param {string} data
    */
-  public putString(data: string): void {
+  public putString(data: string): this {
     this.putLInt(data.length)
     this.put(data)
+    return this;
   }
 }

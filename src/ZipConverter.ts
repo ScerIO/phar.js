@@ -11,20 +11,20 @@ import { Compression } from './phar/Const'
 /**
  * Convert Phar to Zip
  * @property {Archive} phar
- * @return {JSZip} - zip data
+ * @returns {JSZip} zip data
  */
 export async function toZip(phar: Archive): Promise<JSZip> {
   const zip = new JSZip(),
     files = phar.getFiles()
 
-  for (var i in files) {
-    var date = new Date()
-    date.setTime(files[i].getTimestamp() * 1000)
+  files.forEach((file) => {
+    const date = new Date()
+    date.setTime(file.getTimestamp() * 1000)
 
-    zip.file<'uint8array'>(files[i].getName(), toUint8Array(files[i].getContents()), {
+    zip.file<'uint8array'>(file.getName(), toUint8Array(file.getContents()), {
       date
     })
-  }
+  })
 
   return zip
 }
@@ -32,7 +32,7 @@ export async function toZip(phar: Archive): Promise<JSZip> {
 /**
  * Convert Zip to Phar
  * @property {(string|Uint8Array)} data
- * @return {Archive}
+ * @returns {Archive}
  */
 export async function toPhar(
   data: string | Uint8Array,
@@ -47,20 +47,20 @@ export async function toPhar(
   try {
     zip = await sourceZip.loadAsync((data instanceof Uint8Array) ? data : toUint8Array(data))
   } catch (error) {
-    throw Error('JSZip creation error: ' + error)
+    throw Error(`JSZip creation error: ${error}`)
   }
 
   try {
     const files: JSZip.JSZipObject[] = []
-    zip.forEach(async (path: string, file: JSZip.JSZipObject) => files.push(file))
+    zip.forEach((path: string, file: JSZip.JSZipObject) => files.push(file))
 
     for (const file of files)
-      phar.addFile(new File(file.name, await file.async<'text'>('text'), {
+      phar.addFile(new File(file.name, fromUint8Array(await file.async<'uint8array'>('uint8array')), {
         compressionType,
         timestamp: file.date.getDate(),
       }))
   } catch (error) {
-    throw Error('JSZip decompression error: ' + error)
+    throw Error(`JSZip decompression error: ${error}`)
   }
 
   return phar

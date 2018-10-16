@@ -25,7 +25,7 @@ export function crc32(string: string) {
 /**
  * Convert string to Uint8Array
  * @param {string} string
- * @return {Uint8Array}
+ * @returns {Uint8Array}
  */
 export function toUint8Array(string: string): Uint8Array {
   const u8a = new Uint8Array(string.length),
@@ -41,7 +41,7 @@ export function toUint8Array(string: string): Uint8Array {
 /**
  * Convert Uint8Array to string
  * @param {Uint8Array} u8a
- * @return {string}
+ * @returns {string}
  */
 export function fromUint8Array(u8a: Uint8Array): string {
   let string = ''

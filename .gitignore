@@ -1,6 +1,7 @@
 # Package managers
 node_modules
 bower_components
+yarn-error.log
 
 # Build files
 lib

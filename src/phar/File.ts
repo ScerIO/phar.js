@@ -7,7 +7,6 @@ import {
 import {
   inflateRaw,
   deflateRaw,
-  inflate
 } from 'pako'
 
 export interface FileOptions {
@@ -47,7 +46,6 @@ export interface FileOptions {
  * @class PharFile
  */
 export default class File {
-
   /**
    * File name
    * @type {string}
@@ -92,16 +90,16 @@ export default class File {
 
   /**
    * @constructor
-   * @param {string} name     - filename (path)
-   * @param {string} contents - file contents
-   * @param {FileOptions?} options  - file options
+   * @param {string} name filename (path)
+   * @param {string} contents file contents
+   * @param {FileOptions?} options file options
    */
   constructor(name: string, contents: string, options: FileOptions = {}) {
     this.name = name || 'file';
     this.setCompressionType(options.compressionType || Compression.NONE);
     this.setContents(contents || '', options.isCompressed || false);
     this.setTimestamp(options.timestamp || -1);
-    this.setPermission(options.permission || 438); // 0666
+    this.setPermission(options.permission || 438); // linux filesystem permission 0666
     this.metadata = options.metadata || '';
 
     return this;
@@ -109,9 +107,9 @@ export default class File {
 
   /**
    * Get filename (path)
-   * @return {string}
+   * @returns {string}
    */
-  getName() {
+  getName(): string {
     return this.name;
   }
 
@@ -119,24 +117,25 @@ export default class File {
    * Set filename (path)
    * @param {string} name
    */
-  setName(name: string) {
+  setName(name: string): this {
     this.name = name;
+    return this;
   }
 
   /**
    * Get file contents
-   * @return {string}
+   * @returns {string}
    */
-  getContents() {
+  getContents(): string {
     return this.contents;
   }
 
   /**
    * Set file contents
    * @param {string} contents
-   * @param {boolean} isCompressed - is given contents already compressed
+   * @param {boolean} isCompressed is given contents already compressed
    */
-  setContents(contents: string, isCompressed: boolean) {
+  setContents(contents: string, isCompressed: boolean): this {
     if (isCompressed) {
       switch (this.compressionType) {
         case Compression.NONE:
@@ -163,9 +162,9 @@ export default class File {
 
   /**
    * Get file compressed contents
-   * @return {string}
+   * @returns {string}
    */
-  getCompressedContents() {
+  getCompressedContents(): string {
     switch (this.compressionType) {
       case Compression.GZ:
         try {
@@ -181,25 +180,25 @@ export default class File {
 
   /**
    * Get file size
-   * @return {number}
+   * @returns {number}
    */
-  getSize() {
+  getSize(): number {
     return this.getContents().length;
   }
 
   /**
    * Get file compressed size
-   * @return {string}
+   * @returns {number}
    */
-  getComressedSize() {
+  getComressedSize(): number {
     return this.getCompressedContents().length;
   }
 
   /**
    * Get file compression type
-   * @return {number}
+   * @returns {number}
    */
-  getCompressionType() {
+  getCompressionType(): number {
     return this.compressionType;
   }
 
@@ -207,7 +206,7 @@ export default class File {
    * Set compression type
    * @param {number} type
    */
-  setCompressionType(type: number) {
+  setCompressionType(type: number): this {
     if (Const.SUPPORTED_COMPRESSION.indexOf(type) == -1) {
       throw Error('(' + type + ') compression type is not supported!');
     }
@@ -218,9 +217,9 @@ export default class File {
 
   /**
    * Get file permission
-   * @return {number}
+   * @returns {number}
    */
-  getPermission() {
+  getPermission(): number {
     return this.permission;
   }
 
@@ -228,7 +227,7 @@ export default class File {
    * Set file permission
    * @param {number} perm
    */
-  setPermission(perm: number) {
+  setPermission(perm: number): this {
     if (perm > 4095 || perm < 0) {
       throw Error('Permission number is too ' + (perm < 0 ? 'small' : 'large') + '!');
     }
@@ -239,17 +238,17 @@ export default class File {
 
   /**
    * Get phar flags
-   * @return {number}
+   * @returns {number}
    */
-  getPharFlags() {
+  getPharFlags(): number {
     return (this.permission | this.compressionType);
   }
 
   /**
    * Get file timestamp
-   * @return {number}
+   * @returns {number}
    */
-  getTimestamp() {
+  getTimestamp(): number {
     return this.timestamp;
   }
 
@@ -257,7 +256,7 @@ export default class File {
    * Set file timestamp
    * @param {number} time
    */
-  setTimestamp(time: number) {
+  setTimestamp(time: number): this {
     if (time < 0) {
       time = Date.now() / 1000 | 0;
     }
@@ -268,9 +267,9 @@ export default class File {
 
   /**
    * Get file metadata
-   * @return {number}
+   * @returns {string}
    */
-  getMetadata() {
+  getMetadata(): string {
     return this.metadata;
   }
 
@@ -278,9 +277,8 @@ export default class File {
    * Set file metadata
    * @param {string} metadata
    */
-  setMetadata(metadata: string) {
+  setMetadata(metadata: string): this {
     this.metadata = metadata;
     return this;
   }
-
 }
