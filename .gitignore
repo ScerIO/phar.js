@@ -12,3 +12,6 @@ test/build
 # Test files
 test.phar
 test.zip
+
+# Generated docs
+docs/
