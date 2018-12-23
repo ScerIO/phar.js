@@ -7,6 +7,8 @@ Utilities for working with PHAR archives in JavaScipt
 
 ___Supported modules types: UMD (CommonJS + AMD), SystemJS, es2015___
 
+[Docs located here][docs-url]
+
 ## Install
 
 - NPM
@@ -87,3 +89,4 @@ PHAR.ZipConverter.toPhar(fs.readFileSync('test.zip'))
 [npm-url]: https://npmjs.org/package/phar
 [downloads-image]: https://img.shields.io/npm/dm/phar.svg
 [downloads-url]: https://npmjs.org/package/phar
+[docs-url]: https://pharjs.scer.io
